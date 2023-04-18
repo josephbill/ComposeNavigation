@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -70,6 +71,12 @@ fun Navigation(navController: NavHostController){
          composable(BottomNavigationItems.Profile.route){
              ProfileScreen()
          }
+         composable(BottomNavigationItems.SideNav.route){
+//             go to the navigation activity
+             val context  = LocalContext.current
+             val intent = Intent(context, SideNavigationActivity::class.java)
+             context.startActivity(intent)
+         }
      }
 }
 
@@ -100,7 +107,8 @@ fun TopBarPreview(){
 fun BottomNavigationBar(navController: NavController){
     // create a list of the items from the sealed class
     // loop each item to create the view for it
-    val items = listOf(BottomNavigationItems.Home, BottomNavigationItems.About, BottomNavigationItems.Profile,)
+    val items = listOf(BottomNavigationItems.Home, BottomNavigationItems.About, BottomNavigationItems.Profile,
+    BottomNavigationItems.SideNav)
     BottomNavigation(
         backgroundColor = colorResource(id = R.color.yellow),
         contentColor = Color.Black
